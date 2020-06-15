@@ -47,6 +47,9 @@ class ServerUtil {
                         //본문 string을 Json형태로 변환
                         val json = JSONObject(bodyString)
                         Log.d("JSON 응답:", json.toString())
+
+
+                        handler?.onResponse(json) //JSON 파싱은 => 화면에서 진행하도록 처리(인터페이스 역활)
                         
                     }
 
