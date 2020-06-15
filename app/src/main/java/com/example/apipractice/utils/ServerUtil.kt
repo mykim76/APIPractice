@@ -3,6 +3,7 @@ package com.example.apipractice.utils
 import android.content.Context
 import android.util.Log
 import okhttp3.*
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.json.JSONObject
 import java.io.IOException
 
@@ -54,9 +55,51 @@ class ServerUtil {
                     }
 
                 })
+        }
+
+        //중복체크를 get으로 요청하는 함수
+        fun getRequestDuplicatedCheck(context: Context, type: String, input: String, handler: JsonResponseHandler?){
+            val client = OkHttpClient()
+
+            //GET 방식은 주소에 파라미터를 모두 적어줘야 함
+
+            //val urlString = "${BASE_URL}/user" //어느 기능 주소로 가는지 host와 조합해서 명시
+            val urlBuilder = "${BASE_URL}/user_check".toHttpUrlOrNull()!!.newBuilder() //가공된 주소를 가지고 파마메타 첨주할 준비
+                .addEncodedQueryParameter("type",type)
+                .addEncodedQueryParameter("value",input)
+                .build()
+
+            val urlString = urlBuilder.toString()
+
+            val request = Request.Builder()
+                .url(urlString)
+                .get()
+                //.header() //필요시 첨부
+                .build()
+
+            //실제 호출(요청)
+            client.newCall(request)
+                .enqueue(object : Callback{
+                    override fun onFailure(call: Call, e: IOException) {
+                        //연결 실패한 경우
+
+                    }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        //서버 연결 성공=>어떤 내용이든 응답은 받은 경우
+                        val bodyString = response.body!!.string() //서버의 응답중 본문을 string으로 저장
+
+                        //본문 string을 Json형태로 변환
+                        val json = JSONObject(bodyString)
+                        Log.d("JSON 응답:", json.toString())
 
 
-            
+                        handler?.onResponse(json) //JSON 파싱은 => 화면에서 진행하도록 처리(인터페이스 역활)
+
+                    }
+
+                })
+
         }
     }
     
