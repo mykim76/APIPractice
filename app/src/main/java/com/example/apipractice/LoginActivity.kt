@@ -1,5 +1,6 @@
 package com.example.apipractice
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.example.apipractice.utils.ServerUtil
@@ -41,6 +42,9 @@ class LoginActivity : BaseActivity() {
         }
 
         btnSignUp.setOnClickListener {
+
+            val myIntent = Intent(mContext, SingUpActivity::class.java)
+            startActivity(myIntent)
 
         }
     }
