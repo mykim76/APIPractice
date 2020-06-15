@@ -8,6 +8,11 @@ import org.json.JSONObject
 
 class LoginActivity : BaseActivity() {
     override fun setValues() {
+
+
+    }
+
+    override fun setupEvents() {
         btnLogin.setOnClickListener {
             val email = emailEdt.text.toString()
             val password = passwordEdt.text.toString()
@@ -22,12 +27,12 @@ class LoginActivity : BaseActivity() {
                     }
                     else
                     {
-                        //로그인 실패
+                        //로그인 실패 //kj_cho@nepp.kr
                         //UI 반영: 서버에서 알려주는 실패 사유를 토스트로 출력
                         //인터넷 통신 => 백그라운드 쓰레드에서 돌고 있음 => UI 접근시 강제 종료 됨
                         //=> UI 쓰레드가 실행해서 토스트 뛰우도록 해야 죽지 않음
                         runOnUiThread {
-                            Toast.makeText(mContext, "로그인 실패", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext, "${json.getString("message")}", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -35,10 +40,9 @@ class LoginActivity : BaseActivity() {
             })
         }
 
-    }
+        btnSignUp.setOnClickListener {
 
-    override fun setupEvents() {
-
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
