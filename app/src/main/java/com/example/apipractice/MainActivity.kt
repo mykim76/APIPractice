@@ -2,6 +2,7 @@ package com.example.apipractice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.apipractice.datas.User
 import com.example.apipractice.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
@@ -17,9 +18,14 @@ class MainActivity : BaseActivity() {
                 {
                     val data = json.getJSONObject("data")
                     val user = data.getJSONObject("user")
-                    val nick = user.getString("nick_name")
+
+
+                    val loginUser = User.getUserFromJson(user)
+
+                    //val nick = user.getString("nick_name")
                     runOnUiThread {
-                        txtUserNickName.text = nick
+                        txtUserNickName.text = loginUser.nickName
+                        txtUserEmail.text = loginUser.email
                     }
                 }
             }

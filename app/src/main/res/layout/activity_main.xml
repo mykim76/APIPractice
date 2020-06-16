@@ -12,7 +12,15 @@
         android:id="@+id/txtUserNickName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="25dp"
         android:hint="로그인한 사람 이름"/>
+
+    <TextView
+        android:id="@+id/txtUserEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:hint="로그인한 사람 이메일"/>
 
 
 </LinearLayout>
