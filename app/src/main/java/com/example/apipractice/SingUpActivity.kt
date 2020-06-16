@@ -2,6 +2,7 @@ package com.example.apipractice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.apipractice.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_sing_up.*
@@ -81,13 +82,34 @@ class SingUpActivity : BaseActivity() {
             }
 
             val pw = etdPW.text.toString()
-            if(pw.length>8) {isPWOK = true}
+            val email = etdEmail.text.toString()
+            val nick = etdNick.toString()
+            //Log.d("email:", email)
+            //if(pw.length>=8) {isPWOK = true}
 
-            if(!isPWOK){
+            if(pw.length<8){
                 Toast.makeText(mContext,"비밀번호는 8자 이상이어야 합니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
+            //서버에 회원가입 시키기
+            ServerUtil.putRequestSingUp(mContext,email,nick,pw, object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
+                    val code = json.getInt("code")
+
+                    runOnUiThread {
+                        if (code == 200) {
+                            Toast.makeText(mContext,"회원가입 성공", Toast.LENGTH_SHORT).show()
+                            finish()
+
+                        } else {
+                            Toast.makeText(mContext,"실패", Toast.LENGTH_SHORT).show()
+                            //finish()
+                        }
+                    }
+                }
+
+            })
 
 
         }
