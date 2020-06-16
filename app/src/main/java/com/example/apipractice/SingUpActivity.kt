@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.apipractice.utils.ContextUtil
 import com.example.apipractice.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_sing_up.*
 import org.json.JSONObject
@@ -99,8 +100,12 @@ class SingUpActivity : BaseActivity() {
 
                     runOnUiThread {
                         if (code == 200) {
-                            Toast.makeText(mContext,"회원가입 성공", Toast.LENGTH_SHORT).show()
-                            finish()
+                            //Toast.makeText(mContext,"회원가입 성공", Toast.LENGTH_SHORT).show()
+                            val data = json.getJSONObject("data")
+                            val token = data.getString("token") //토큰 추출
+
+                            //폰에 저장해두는게 편리 =>ContextUtil
+                            ContextUtil.setUserToken(mContext,token)
 
                         } else {
                             Toast.makeText(mContext,"실패", Toast.LENGTH_SHORT).show()
