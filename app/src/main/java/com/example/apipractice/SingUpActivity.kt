@@ -33,6 +33,31 @@ class SingUpActivity : BaseActivity() {
 
             })
         }
+
+        btnCheckNick.setOnClickListener {
+
+            val nick = etdNick.text.toString()
+
+            ServerUtil.getRequestDuplicatedCheck(mContext,"NICK_NAME",nick, object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
+                    val code  = json.getInt("code")
+                    
+                    runOnUiThread { 
+                        
+                        if(code == 200)
+                        {
+                            txtCheckNickResult.text="사용해도 좋음"
+                        }
+                        else{
+                            
+                            txtCheckNickResult.text="중복 닉네임"
+                        }
+                    }
+                }
+
+
+            })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

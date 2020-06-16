@@ -36,4 +36,34 @@
         android:layout_height="wrap_content"
         android:text="이메일 중복 검사를 해주세요"/>
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="닉네임"/>
+
+    <FrameLayout
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/etdNick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="닉네임"
+            android:inputType="textEmailAddress"/>
+        <Button
+            android:id="@+id/btnCheckNick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="중복확인"/>
+    </FrameLayout>
+    <TextView
+        android:id="@+id/txtCheckNickResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이메일 중복 검사를 해주세요"/>
+
 </LinearLayout>
