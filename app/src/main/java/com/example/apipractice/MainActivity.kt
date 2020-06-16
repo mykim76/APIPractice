@@ -10,24 +10,21 @@ import org.json.JSONObject
 class MainActivity : BaseActivity() {
     override fun setValues() {
 
-        ServerUtil.getRequestUserInfo(mContext, object : ServerUtil.JsonResponseHandler{
+        // 진행중인 토론 목록이 어떤게 있는지 무어보자
+        ServerUtil.getRequestMainInfo(mContext,object : ServerUtil.JsonResponseHandler{
             override fun onResponse(json: JSONObject) {
 
-                val code = json.getInt("code")
-                if(code==200)
+                val data = json.getJSONObject("data")
+                val topics = data.getJSONArray("topics") //[]안은 JSONArray 받기
+
+
+                //for(topic in topics)
+                for(i in 0..topics.length()-1)
                 {
-                    val data = json.getJSONObject("data")
-                    val user = data.getJSONObject("user")
+                    val topicJson = topics.getJSONObject(i)
 
-
-                    val loginUser = User.getUserFromJson(user)
-
-                    //val nick = user.getString("nick_name")
-                    runOnUiThread {
-                        txtUserNickName.text = loginUser.nickName
-                        txtUserEmail.text = loginUser.email
-                    }
                 }
+
             }
 
         })
