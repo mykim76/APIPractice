@@ -38,12 +38,12 @@
 
 
     <TextView
+        android:layout_marginTop="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="닉네임"/>
 
     <FrameLayout
-        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -65,5 +65,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="이메일 중복 검사를 해주세요"/>
+
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호"/>
+
+
+
+        <EditText
+            android:id="@+id/etdPW"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="비밀번호 8글자 이상으로 해주세요"
+            android:inputType="textPassword"/>
+
+        <Button
+            android:id="@+id/btnSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="회원가입"/>
+
+
+
 
 </LinearLayout>
