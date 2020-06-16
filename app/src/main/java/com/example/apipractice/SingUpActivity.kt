@@ -84,7 +84,7 @@ class SingUpActivity : BaseActivity() {
 
             val pw = etdPW.text.toString()
             val email = etdEmail.text.toString()
-            val nick = etdNick.toString()
+            val nick = etdNick.text.toString()
             //Log.d("email:", email)
             //if(pw.length>=8) {isPWOK = true}
 
@@ -100,12 +100,7 @@ class SingUpActivity : BaseActivity() {
 
                     runOnUiThread {
                         if (code == 200) {
-                            //Toast.makeText(mContext,"회원가입 성공", Toast.LENGTH_SHORT).show()
-                            val data = json.getJSONObject("data")
-                            val token = data.getString("token") //토큰 추출
 
-                            //폰에 저장해두는게 편리 =>ContextUtil
-                            ContextUtil.setUserToken(mContext,token)
 
                         } else {
                             Toast.makeText(mContext,"실패", Toast.LENGTH_SHORT).show()
