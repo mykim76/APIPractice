@@ -1,10 +1,13 @@
 package com.example.apipractice
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import com.example.apipractice.adapters.TopicAdapter
 import com.example.apipractice.datas.Topic
 import com.example.apipractice.datas.User
+import com.example.apipractice.utils.ContextUtil
 import com.example.apipractice.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
@@ -43,6 +46,51 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+        btnLogout.setOnClickListener {
+            //로그아웃이 눌리면 정말 로그아웃 할 것인지 확인 받기
+            //저장된 토큰을 빈칸으로 돌려주자
+
+//            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    switch (which){
+//                        case DialogInterface.BUTTON_POSITIVE:
+//                        //Yes button clicked
+//                        break;
+//
+//                        case DialogInterface.BUTTON_NEGATIVE:
+//                        //No button clicked
+//                        break;
+//                    }
+//                }
+//            };
+//
+//            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+//            builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+//                .setNegativeButton("No", dialogClickListener).show();
+
+            val alertDialogBuilder = AlertDialog.Builder(mContext)
+            val builder = AlertDialog.Builder(mContext)
+            builder.setTitle("로그아웃")
+            builder.setMessage("정말 로그아웃 하겠습니까?")
+
+            builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+                //ContextUtil.setAutoLogin(mContext,false)
+                ContextUtil.setUserToken(mContext,"")
+
+                val myIntent = Intent(mContext,LoginActivity::class.java)
+                startActivity(myIntent)
+                finish()
+
+            }
+
+            builder.setNegativeButton(android.R.string.no) { dialog, which ->
+
+            }
+            builder.show()
+
+
+        }
 
     }
 
