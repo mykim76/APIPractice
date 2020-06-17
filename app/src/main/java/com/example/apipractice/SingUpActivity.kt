@@ -22,6 +22,22 @@ class SingUpActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        etdNick.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+                
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                txtCheckNickResult.text = "닉네임 중복 검사를 해주세요"
+                isNickOK = false
+            }
+
+        })
         // 이메일 입력값이 변경되면 무조건 다시 검사를 받으라고 문구 / Boolean 변경
 
         // 에디트객체에 이벤트 추가
