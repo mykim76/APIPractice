@@ -1,8 +1,9 @@
 package com.example.apipractice.datas
 
 import org.json.JSONObject
+import java.io.Serializable
 
-class Topic {
+class Topic : Serializable {
 
     companion object {
 
