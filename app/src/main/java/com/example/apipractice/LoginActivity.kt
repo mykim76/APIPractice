@@ -2,6 +2,7 @@ package com.example.apipractice
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.apipractice.utils.ContextUtil
 import com.example.apipractice.utils.ServerUtil
@@ -56,6 +57,16 @@ class LoginActivity : BaseActivity() {
 
             val myIntent = Intent(mContext, SingUpActivity::class.java)
             startActivity(myIntent)
+
+        }
+        
+        // 자동 로그인 체크박스의 값 변화 이벤트
+        chkAutoLogin.setOnCheckedChangeListener { buttonView, isChecked ->
+            Log.d("체크박스 값",isChecked.toString())
+
+            //체크가 됐다면 =>
+            //체크가 해제됐다면 -> ContextUtil로 자동 로그인 false로 저장
+            ContextUtil.setAutoLogin(mContext,isChecked)
 
         }
     }

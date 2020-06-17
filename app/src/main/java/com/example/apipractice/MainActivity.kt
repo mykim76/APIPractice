@@ -30,11 +30,9 @@ class MainActivity : BaseActivity() {
                     val topicJson = topics.getJSONObject(i)
                     val topic = Topic.getTopicFromJson(topicJson)//주제 하나에 대응되는 JSON을 넣어서 Topic 객체로 얻어내자
                     topicList.add(topic)//주제목록을 리스트뷰 재료로 추가
-
                 }
 
                 runOnUiThread {
-
                     topicAdapter = TopicAdapter(mContext, R.layout.topic_list_item,topicList)
                     topicListView.adapter = topicAdapter
                 }
