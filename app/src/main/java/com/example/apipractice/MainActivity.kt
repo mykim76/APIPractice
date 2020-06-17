@@ -46,6 +46,11 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        topicListView.setOnItemClickListener { parent, view, position, id ->
+            val myIntent = Intent(mContext, ViewTopicDetailActivity::class.java)
+            startActivity(myIntent)
+        }
         btnLogout.setOnClickListener {
             //로그아웃이 눌리면 정말 로그아웃 할 것인지 확인 받기
             //저장된 토큰을 빈칸으로 돌려주자
