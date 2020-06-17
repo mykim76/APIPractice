@@ -2,6 +2,8 @@ package com.example.apipractice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import com.example.apipractice.utils.ContextUtil
@@ -20,6 +22,28 @@ class SingUpActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+        // 이메일 입력값이 변경되면 무조건 다시 검사를 받으라고 문구 / Boolean 변경
+
+        // 에디트객체에 이벤트 추가
+        etdEmail.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                Log.d("바뀐 이메일", s.toString())
+                //이메일 검사 필요
+                txtCheckEmailResult.text ="이메일 중복 검사를 해주세요"
+                isEmailOK = false//이메일 사용 불가 처리
+                
+            }
+
+        })
+        
         btnCheckEmail.setOnClickListener {
             val email = etdEmail.text.toString()
             //서버에 중복 확인 요청
