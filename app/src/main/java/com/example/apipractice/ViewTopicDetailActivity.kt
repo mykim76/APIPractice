@@ -2,12 +2,14 @@ package com.example.apipractice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.apipractice.datas.Topic
 import com.example.apipractice.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_view_topic_detail.*
 import org.json.JSONObject
+import java.util.*
 
 class ViewTopicDetailActivity : BaseActivity() {
     
@@ -46,6 +48,26 @@ class ViewTopicDetailActivity : BaseActivity() {
                     Glide.with(mContext).load(mTopic.imgUrl).into(imgTopic)
                     txtFirstSideTitle.text = mTopic.sideList[0].title
                     txtSecondSideTitle.text = mTopic.sideList[1].title
+                    //특표수
+                    txtFirstViewCount.text = mTopic.sideList[0].vote_count.toString()
+                    txtSecondViewCount.text = mTopic.sideList[1].vote_count.toString()
+                    //어디 투표했는지 표시
+
+                    if(mTopic.mySelectedSideIndex==-1){
+                        //미선택
+                        btnFirstVote.text="투표하기"
+                        btnSecondVote.text="투표하기"
+                    }
+                    else if(mTopic.mySelectedSideIndex==0){
+                        //미선택
+                        btnFirstVote.text="투표취소"
+                        btnSecondVote.text="갈아타기"
+                    }
+                    else if(mTopic.mySelectedSideIndex==1){
+                        //미선택
+                        btnFirstVote.text="갈아타기"
+                        btnSecondVote.text="투표취소"
+                    }
                 }
 
 
@@ -56,7 +78,63 @@ class ViewTopicDetailActivity : BaseActivity() {
         
     }
     override fun setupEvents() {
+        btnFirstVote.setOnClickListener {
+            val id = mTopic.sideList[0].id
+            ServerUtil.postRequestVote(mContext,id, object : ServerUtil.JsonResponseHandler{
 
+                override fun onResponse(json: JSONObject) {
+                    val code = json.getInt("code")
+
+                    val msg = json.getString("message")
+
+                    getTopicDetailFromServer()
+                    
+
+//                    runOnUiThread {
+//                        if (code == 20) {
+//                            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show()
+//                            finish()
+//                        } else {
+//                            Toast.makeText(mContext, "투표 실패", Toast.LENGTH_SHORT).show()
+//                            finish()
+//                        }
+//                    }
+                }
+
+            })
+
+
+        }
+
+
+        btnSecondVote.setOnClickListener {
+            val id = mTopic.sideList[1].id
+            ServerUtil.postRequestVote(mContext,id,object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
+
+                    val code = json.getInt("code")
+                    val msg = json.getString("message")
+
+                    getTopicDetailFromServer()
+
+//                    runOnUiThread {
+//                        if (code == 20) {
+//                            Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show()
+//                            finish()
+//                        }else{
+//                            Toast.makeText(mContext,"투표 실패",Toast.LENGTH_SHORT).show()
+//                            finish()
+//                        }
+//                    }
+
+
+                }
+
+            })
+
+
+
+        }
 
 
     }
