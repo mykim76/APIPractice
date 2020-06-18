@@ -39,7 +39,7 @@ class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
         val data = mList[position]
 
 
-        txtWriter.text = "${data.userId}"
+        txtWriter.text = "${data.writer.nickName}"
         txtContent.text = "${data.content}"
         //txtDateTime.text = "${data.d}"
 
