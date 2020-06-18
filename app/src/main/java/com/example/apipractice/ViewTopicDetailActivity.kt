@@ -44,6 +44,8 @@ class ViewTopicDetailActivity : BaseActivity() {
                 runOnUiThread {
                 txtTopicTitle.text = mTopic.title
                     Glide.with(mContext).load(mTopic.imgUrl).into(imgTopic)
+                    txtFirstSideTitle.text = mTopic.sideList[0].title
+                    txtSecondSideTitle.text = mTopic.sideList[1].title
                 }
 
 
