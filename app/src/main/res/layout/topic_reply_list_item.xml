@@ -10,6 +10,7 @@
         android:padding="10dp">
 
         <TextView
+            android:id="@+id/txtWriter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="작성자닉네임"
@@ -17,6 +18,7 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/txtContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="내용자리"
@@ -25,6 +27,7 @@
             android:layout_marginTop="5dp"/>
 
         <TextView
+            android:id="@+id/txtDateTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="~시간"

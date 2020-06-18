@@ -38,6 +38,16 @@ class Topic : Serializable {
                     t.mySelectedSideIndex=i;
                 }
             }
+
+            //reply
+            val replies = json.getJSONArray("replies")
+            for(i in 0.. replies.length()-1)
+            {
+                val reply = replies.getJSONObject(i)
+                val topicReply = TopicReply.getTopicReplyFromJason(reply)
+                t.replyList.add(topicReply)
+            }
+
             return t
         }
     }
@@ -47,4 +57,5 @@ class Topic : Serializable {
     var mySideId = 0
     var mySelectedSideIndex = -1 //내가 선택한 진영이 첫번째 또는 두번째 안했는지 기억=>미선택:-1
     val sideList = ArrayList<TopicSide>()
+    val replyList = ArrayList<TopicReply>()
 }
