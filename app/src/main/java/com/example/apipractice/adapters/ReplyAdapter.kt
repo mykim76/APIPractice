@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.apipractice.R
 import com.example.apipractice.datas.Topic
 import com.example.apipractice.datas.TopicReply
+import java.text.SimpleDateFormat
 
 class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
     ArrayAdapter<TopicReply>(context, resId,list)  {
@@ -34,14 +35,17 @@ class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
 
         val txtWriter = row.findViewById<TextView>(R.id.txtWriter)
         val txtContent = row.findViewById<TextView>(R.id.txtContent)
-        val txtDateTime = row.findViewById<TextView>(R.id.txtDateTime)
+        val txtWriteTime = row.findViewById<TextView>(R.id.txtWriteTime)
 
         val data = mList[position]
 
 
         txtWriter.text = "${data.writer.nickName}"
         txtContent.text = "${data.content}"
-        //txtDateTime.text = "${data.d}"
+        
+        val sdf = SimpleDateFormat("M월 d일 a h시 m분")
+
+        txtWriteTime.text = sdf.format(data.createdAt.time) //?월?일 오전/오후 ?시 ?분 출력
 
         return row
     }
