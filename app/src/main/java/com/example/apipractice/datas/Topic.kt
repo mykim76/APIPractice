@@ -15,6 +15,18 @@ class Topic : Serializable {
             t.title = json.getString("title")
             t.imgUrl = json.getString("img_url")
 
+            //선택가능 진영 정보 파싱=>JsonArry파싱부터
+            val sides = json.getJSONArray("sides")
+            for(i in 0.. sides.length()-1)
+            {
+                val side = sides.getJSONObject(i)
+//                side.getInt("id")
+//                side.getInt("topic_id")
+//                side.getString("title")
+//                side.getInt("vote_count")
+
+            }
+
             return t
         }
     }
