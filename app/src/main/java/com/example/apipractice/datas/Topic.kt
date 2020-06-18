@@ -24,7 +24,8 @@ class Topic : Serializable {
 //                side.getInt("topic_id")
 //                side.getString("title")
 //                side.getInt("vote_count")
-
+                val topicSide = TopicSide.getTopicsSideFromJason(side)//json=>TopicSide 객체화
+                t.sideList.add(topicSide)//해당 주제 진영 배열에 추가
             }
 
             return t
@@ -33,4 +34,5 @@ class Topic : Serializable {
     var id=0
     var title = ""
     var imgUrl = ""
+    val sideList = ArrayList<TopicSide>()
 }
