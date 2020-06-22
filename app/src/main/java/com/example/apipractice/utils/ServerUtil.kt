@@ -241,7 +241,7 @@ class ServerUtil {
 
             //val urlString = "${BASE_URL}/user" //어느 기능 주소로 가는지 host와 조합해서 명시
             val urlBuilder = "${BASE_URL}/topic/${topicId}".toHttpUrlOrNull()!!.newBuilder() //가공된 주소를 가지고 파마메타 첨주할 준비
-                .addEncodedQueryParameter("order_type","POPULAR")
+                .addEncodedQueryParameter("order_type","NEW")
                 //.addEncodedQueryParameter("value",input)
                 .build()
 
@@ -288,6 +288,52 @@ class ServerUtil {
             //server에 전달할 데이터를 담는 과정(post - 폼데이터)
             val formData = FormBody.Builder()
                 .add("side_id",side_id.toString())
+                .build()
+
+            //서버에 요청할 모든 정보를 담는 request 변수 생성
+            val request = Request.Builder()
+                .url(urlString)
+                .post(formData)
+                .header("X-Http-Token", ContextUtil.getUserToken(context)) //API에서 헤더를 요구하면 여기에 추가
+                .build()
+
+            //실제 호출(요청)
+            client.newCall(request)
+                .enqueue(object : Callback{
+                    override fun onFailure(call: Call, e: IOException) {
+                        //연결 실패한 경우
+
+                    }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        //서버 연결 성공=>어떤 내용이든 응답은 받은 경우
+                        val bodyString = response.body!!.string() //서버의 응답중 본문을 string으로 저장
+
+                        //본문 string을 Json형태로 변환
+                        val json = JSONObject(bodyString)
+                        Log.d("JSON 응답:", json.toString())
+
+
+                        handler?.onResponse(json) //JSON 파싱은 => 화면에서 진행하도록 처리(인터페이스 역활)
+
+                    }
+
+                })
+        }
+
+        //의견 등록
+
+        fun postRequestTopicReply(context: Context, topic_id: Int, opinion:String, handler: JsonResponseHandler?){
+        //fun postRequestTopicReply(context: Context, opinion:String, handler: JsonResponseHandler?){
+
+            val client = OkHttpClient() //서버에 클라이언트로 동작해주는 변수
+
+            val urlString = "${BASE_URL}/topic_reply" //어느 기능 주소로 가는지 host와 조합해서 명시
+
+            //server에 전달할 데이터를 담는 과정(post - 폼데이터)
+            val formData = FormBody.Builder()
+                .add("topic_id",topic_id.toString())
+                .add("content",opinion)
                 .build()
 
             //서버에 요청할 모든 정보를 담는 request 변수 생성

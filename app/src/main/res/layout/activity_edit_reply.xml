@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="토론주제"/>
     <TextView
-        android:id="@+id/txtMySide"
+        android:id="@+id/txtTopicTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
@@ -27,12 +27,13 @@
         android:layout_marginTop="20dp"
         android:text="선택한 진영"/>
     <TextView
+        android:id="@+id/txtMySideTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:layout_marginTop="5dp"
-        android:text="실제 주제가 진영 자리"/>
+        android:text="실제 진영 자리"/>
 
 
     <TextView
@@ -40,7 +41,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="의견 내용"/>
-    <TextView
+    <EditText
+        android:id="@+id/edtOpinion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
@@ -48,9 +50,10 @@
         android:layout_marginTop="5dp"
         android:minLines="3"
         android:gravity="top"
-        android:text="선택한 진영에 대한 논리를 말해주세요"/>
+        android:hint="선택한 진영에 대한 논리를 말해주세요"/>
 
     <Button
+        android:id="@+id/btnPostReply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="의견 등록 하기"/>
