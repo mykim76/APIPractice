@@ -178,4 +178,11 @@ class ViewTopicDetailActivity : BaseActivity() {
         setValues()
         setupEvents()
     }
+
+    override fun onResume() {
+        super.onResume()
+
+        //화면이 다시 나타날 때
+        getTopicDetailFromServer()
+    }
 }

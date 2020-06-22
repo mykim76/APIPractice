@@ -1,6 +1,7 @@
 package com.example.apipractice.adapters
 
 import android.content.Context
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +14,10 @@ import com.example.apipractice.R
 import com.example.apipractice.datas.Topic
 import com.example.apipractice.datas.TopicReply
 import com.example.apipractice.utils.ServerUtil
+import okhttp3.internal.http2.Http2Reader
 import org.json.JSONObject
 import java.text.SimpleDateFormat
+import java.util.logging.Handler
 
 class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
     ArrayAdapter<TopicReply>(context, resId,list)  {
@@ -68,7 +71,28 @@ class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
              
              ServerUtil.postRequestReplyLikeOrDislike(mContext,data.id, isLike, object : ServerUtil.JsonResponseHandler{
                  override fun onResponse(json: JSONObject) {
+
+                     val dataObj = json.getJSONObject("data")
+                     val reply = dataObj.getJSONObject("reply")
                      
+                     //data변수 내부 값중 좋아요/싫어요 갯수 변경
+                     data.likeCount = reply.getInt("like_count")
+                     data.dislikeCount = reply.getInt("dislike_count")
+
+                     //리스트뷰에 뿌려지는 데이터에 내용 변경 =>  odifyDataSetChanged 필요
+                     //어댑터변수.notify~ 실행. 그러나 현재 어댑터변수가 없으니 어찌할 것인가
+                     
+                     //runOnUriThread필요
+                     //Handler(Looper.getMainLooper()).post {
+//                     android.os.Handler(Looper.getMainLooper()).post {
+//                         notifyDataSetChanged() //어댑터내부에서 직접 새로고침 가능 => runOnUriThread필요
+//                     }
+
+                     Handler(Looper.getMainLooper()).post{
+
+                     }
+
+
                  }
 
              })
