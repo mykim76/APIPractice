@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -37,11 +38,20 @@ class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
         val txtContent = row.findViewById<TextView>(R.id.txtContent)
         val txtWriteTime = row.findViewById<TextView>(R.id.txtWriteTime)
 
+        //
+        val btnReplyCount = row.findViewById<Button>(R.id.btnReplyCount)
+        val btnLikeCount = row.findViewById<Button>(R.id.btnLikeCount)
+        val btnDislikeCount = row.findViewById<Button>(R.id.btnDislikeCount)
+
         val data = mList[position]
 
 
         txtWriter.text = "${data.writer.nickName}"
         txtContent.text = "${data.content}"
+
+        btnReplyCount.text = "답글: ${data.replyCount}개"
+        btnLikeCount.text = "좋아요: ${data.likeCount}개"
+        btnDislikeCount.text = "싫어요: ${data.dislikeCount}개"
         
         val sdf = SimpleDateFormat("M월 d일 a h시 m분")
 

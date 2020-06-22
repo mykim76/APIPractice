@@ -11,6 +11,10 @@ class TopicReply {
     var sideId = 0
     var userId = 0
     var content = ""
+    //like_count / dislike_count/reply_count
+    var likeCount = 0
+    var dislikeCount = 0
+    var replyCount = 0
 
     lateinit var writer : User
     val createdAt = Calendar.getInstance() //작성 일시를 시간형태로 저장(기본:현재시간)
@@ -40,6 +44,12 @@ class TopicReply {
 
             val timeOffset = myPhoneTimeZone.rawOffset / 1000/60/60 //몇시간 차이가 나는지 계산 rawOffset:밀리초단위 =>시간으로 변경
             tr.createdAt.add(Calendar.HOUR, timeOffset) //계시글 작성시간을 timeOffset만큼 변경
+
+            //좋아요/싫어요/답글  목록 화면에 반영
+            //like_count / dislike_count/reply_count
+            tr.likeCount = json.getInt("like_count")
+            tr.dislikeCount = json.getInt("dislike_count")
+            tr.replyCount = json.getInt("reply_count")
 
             return tr
         }

@@ -44,6 +44,7 @@
             <!--리스트아이템 안에 버튼을 두면 리스트뷰 아이템 이벤트 동작 안함-->
             <!--버튼이 포커스를 갖고 있기 때문=> 포커스 제거 처리-->
             <Button
+                android:id="@+id/btnReplyCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:focusable="false"
@@ -54,12 +55,14 @@
                 android:layout_weight="1"/>
 
             <Button
+                android:id="@+id/btnLikeCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
                 android:focusable="false"
             android:text="좋아요 : 0 개"/>
 
             <Button
+                android:id="@+id/btnDislikeCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:focusable="false"

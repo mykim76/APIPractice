@@ -10,6 +10,7 @@ import com.example.apipractice.datas.Topic
 import com.example.apipractice.datas.TopicReply
 import com.example.apipractice.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_view_topic_detail.*
+import kotlinx.android.synthetic.main.topic_reply_list_item.*
 import org.json.JSONObject
 import java.util.*
 
@@ -71,7 +72,10 @@ class ViewTopicDetailActivity : BaseActivity() {
                         btnFirstVote.text="갈아타기"
                         btnSecondVote.text="투표취소"
                     }
-                    
+
+                    //
+
+
                     //의견목록을 리스트뷰에 뿌려주기
                     mReplyAdapter = ReplyAdapter(mContext,R.layout.topic_reply_list_item,mTopic.replyList)
 
