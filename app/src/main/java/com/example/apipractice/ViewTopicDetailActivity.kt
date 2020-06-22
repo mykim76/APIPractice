@@ -1,5 +1,6 @@
 package com.example.apipractice
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -90,6 +91,14 @@ class ViewTopicDetailActivity : BaseActivity() {
         
     }
     override fun setupEvents() {
+        //의견 등록하기
+        btnPostReply.setOnClickListener {
+
+            val myIntent = Intent(mContext, EditReplyActivity::class.java)
+            startActivity(myIntent)
+        }
+
+
         btnFirstVote.setOnClickListener {
             val id = mTopic.sideList[0].id
             ServerUtil.postRequestVote(mContext,id, object : ServerUtil.JsonResponseHandler{

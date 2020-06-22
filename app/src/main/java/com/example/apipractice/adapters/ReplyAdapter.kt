@@ -56,7 +56,7 @@ class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
         btnDislikeCount.text = "싫어요: ${data.dislikeCount}개"
 
         //선택진영 정보
-        txtSelectedSide.text = "(${data.selectedSide.title}})"
+        txtSelectedSide.text = "(${data.selectedSide.title})"
         
         val sdf = SimpleDateFormat("M월 d일 a h시 m분")
 
