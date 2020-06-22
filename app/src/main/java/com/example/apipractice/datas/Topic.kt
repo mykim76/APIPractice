@@ -48,6 +48,11 @@ class Topic : Serializable {
                 t.replyList.add(topicReply)
             }
 
+            //내 선택 진영 파싱 => 투표 안한 경우 null
+            if(!json.isNull("my_side")) {
+                //null이 아닌 경우만 파싱
+                t.mySideInfo = TopicSide.getTopicsSideFromJason(json.getJSONObject("my_side"))
+            }
             return t
         }
     }
@@ -58,4 +63,6 @@ class Topic : Serializable {
     var mySelectedSideIndex = -1 //내가 선택한 진영이 첫번째 또는 두번째 안했는지 기억=>미선택:-1
     val sideList = ArrayList<TopicSide>()
     val replyList = ArrayList<TopicReply>()
+
+    var mySideInfo : TopicSide? = null//내가 선택한 진영정보//투표를 안한 경우 side 정보는 없음
 }
