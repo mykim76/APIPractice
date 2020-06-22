@@ -94,8 +94,18 @@ class ViewTopicDetailActivity : BaseActivity() {
         //의견 등록하기
         btnPostReply.setOnClickListener {
 
-            val myIntent = Intent(mContext, EditReplyActivity::class.java)
-            startActivity(myIntent)
+
+            mTopic.mySideInfo?.let {
+                //선택 진영이 있을 때만 의견 작성으로 이동
+                val myIntent = Intent(mContext, EditReplyActivity::class.java)
+                myIntent.putExtra("topicTitle", mTopic.title)
+                myIntent.putExtra("mySideTitle", it.title)
+                startActivity(myIntent)
+            }.let {
+                if(it == null) {
+                    Toast.makeText(mContext, "투표를 해야만 의견 작성이 가능합니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
 
