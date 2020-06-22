@@ -12,6 +12,8 @@ import com.bumptech.glide.Glide
 import com.example.apipractice.R
 import com.example.apipractice.datas.Topic
 import com.example.apipractice.datas.TopicReply
+import com.example.apipractice.utils.ServerUtil
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 
 class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
@@ -57,7 +59,25 @@ class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
 
         //선택진영 정보
         txtSelectedSide.text = "(${data.selectedSide.title})"
-        
+
+        // 좋아요/싫어요 클릭 이벤트
+         val likeOrDislikeEvent = View.OnClickListener {
+             //좋아요: is_like - true
+             //싫어요: is_like - false
+             val isLike = it.id == R.id.btnLikeCount //클릭한 버튼이 btnLikeCount 인지 btnDislikeCount인지 체크
+             
+             ServerUtil.postRequestReplyLikeOrDislike(mContext,data.id, isLike, object : ServerUtil.JsonResponseHandler{
+                 override fun onResponse(json: JSONObject) {
+                     
+                 }
+
+             })
+
+         }
+
+        btnLikeCount.setOnClickListener(likeOrDislikeEvent)
+        btnDislikeCount.setOnClickListener(likeOrDislikeEvent)
+
         val sdf = SimpleDateFormat("M월 d일 a h시 m분")
 
         txtWriteTime.text = sdf.format(data.createdAt.time) //?월?일 오전/오후 ?시 ?분 출력
