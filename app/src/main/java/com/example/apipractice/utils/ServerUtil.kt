@@ -241,7 +241,7 @@ class ServerUtil {
 
             //val urlString = "${BASE_URL}/user" //어느 기능 주소로 가는지 host와 조합해서 명시
             val urlBuilder = "${BASE_URL}/topic/${topicId}".toHttpUrlOrNull()!!.newBuilder() //가공된 주소를 가지고 파마메타 첨주할 준비
-                //.addEncodedQueryParameter("type",type)
+                .addEncodedQueryParameter("order_type","POPULAR")
                 //.addEncodedQueryParameter("value",input)
                 .build()
 
@@ -320,6 +320,8 @@ class ServerUtil {
 
                 })
         }
+
+        //
 
     }
     
