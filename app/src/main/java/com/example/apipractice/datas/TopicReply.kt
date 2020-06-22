@@ -16,6 +16,8 @@ class TopicReply {
     var dislikeCount = 0
     var replyCount = 0
 
+    lateinit var selectedSide : TopicSide //의견이 어떤 진영을 옹호하는지
+
     lateinit var writer : User
     val createdAt = Calendar.getInstance() //작성 일시를 시간형태로 저장(기본:현재시간)
 
@@ -50,6 +52,9 @@ class TopicReply {
             tr.likeCount = json.getInt("like_count")
             tr.dislikeCount = json.getInt("dislike_count")
             tr.replyCount = json.getInt("reply_count")
+
+            //선택진영정보 파싱
+            tr.selectedSide = TopicSide.getTopicsSideFromJason(json.getJSONObject("selected_side"))
 
             return tr
         }

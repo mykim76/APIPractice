@@ -43,6 +43,8 @@ class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
         val btnLikeCount = row.findViewById<Button>(R.id.btnLikeCount)
         val btnDislikeCount = row.findViewById<Button>(R.id.btnDislikeCount)
 
+        val txtSelectedSide = row.findViewById<TextView>(R.id.txtSelectedSide)
+
         val data = mList[position]
 
 
@@ -52,6 +54,9 @@ class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
         btnReplyCount.text = "답글: ${data.replyCount}개"
         btnLikeCount.text = "좋아요: ${data.likeCount}개"
         btnDislikeCount.text = "싫어요: ${data.dislikeCount}개"
+
+        //선택진영 정보
+        txtSelectedSide.text = "(${data.selectedSide.title}})"
         
         val sdf = SimpleDateFormat("M월 d일 a h시 m분")
 
