@@ -1,6 +1,7 @@
 package com.example.apipractice.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.apipractice.R
+import com.example.apipractice.ViewReplyDetailActivity
 import com.example.apipractice.datas.Topic
 import com.example.apipractice.datas.TopicReply
 import com.example.apipractice.utils.ServerUtil
@@ -131,6 +133,12 @@ class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
         btnLikeCount.setOnClickListener(likeOrDislikeEvent)
         btnDislikeCount.setOnClickListener(likeOrDislikeEvent)
 
+        //답글 버튼을 누르면 의견 상세 조회 화면으로 이동
+
+        btnReplyCount.setOnClickListener {
+            val myIntent = Intent(mContext, ViewReplyDetailActivity::class.java)
+            mContext.startActivity(myIntent)
+        }
         val sdf = SimpleDateFormat("M월 d일 a h시 m분")
 
         txtWriteTime.text = sdf.format(data.createdAt.time) //?월?일 오전/오후 ?시 ?분 출력
