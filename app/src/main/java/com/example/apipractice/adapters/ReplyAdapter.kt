@@ -88,9 +88,7 @@ class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
 //                         notifyDataSetChanged() //어댑터내부에서 직접 새로고침 가능 => runOnUriThread필요
 //                     }
 
-                     Handler(Looper.getMainLooper()).post{
 
-                     }
 
 
                  }

@@ -21,6 +21,9 @@ class TopicReply {
     lateinit var writer : User
     val createdAt = Calendar.getInstance() //작성 일시를 시간형태로 저장(기본:현재시간)
 
+    var isMyLike = false
+    var isMyDislike = false
+
     companion object {
         //json 덩어리 input => 내용이 모두 적힌 TopicSide 객체 리턴
         fun getTopicReplyFromJason(json: JSONObject):TopicReply{
@@ -55,6 +58,9 @@ class TopicReply {
 
             //선택진영정보 파싱
             tr.selectedSide = TopicSide.getTopicsSideFromJason(json.getJSONObject("selected_side"))
+
+            tr.isMyLike = json.getBoolean("my_like")
+            tr.isMyDislike = json.getBoolean("my_dislike")
 
             return tr
         }
