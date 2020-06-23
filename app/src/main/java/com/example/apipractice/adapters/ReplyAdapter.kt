@@ -137,6 +137,7 @@ class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
 
         btnReplyCount.setOnClickListener {
             val myIntent = Intent(mContext, ViewReplyDetailActivity::class.java)
+            myIntent.putExtra("replyId", data.id)
             mContext.startActivity(myIntent)
         }
         val sdf = SimpleDateFormat("M월 d일 a h시 m분")
