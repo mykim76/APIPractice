@@ -377,7 +377,7 @@ class ServerUtil {
             //server에 전달할 데이터를 담는 과정(post - 폼데이터)
             val formData = FormBody.Builder()
                 .add("reply_id",replyId.toString())
-                .add("is_Like",isLike.toString())
+                .add("is_like",isLike.toString())
                 .build()
 
             //서버에 요청할 모든 정보를 담는 request 변수 생성

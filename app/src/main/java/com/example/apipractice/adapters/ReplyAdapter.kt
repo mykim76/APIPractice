@@ -59,6 +59,30 @@ class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
         btnReplyCount.text = "답글: ${data.replyCount}개"
         btnLikeCount.text = "좋아요: ${data.likeCount}개"
         btnDislikeCount.text = "싫어요: ${data.dislikeCount}개"
+        
+        //나의 좋아요:빨강/싫어요:회색 여부를 표시
+        if(data.isMyLike){
+            btnLikeCount.setBackgroundResource(R.drawable.red_border_box)
+            btnDislikeCount.setBackgroundResource(R.drawable.grey_border_box)
+
+            btnLikeCount.setTextColor(mContext.resources.getColor(R.color.red))
+            btnDislikeCount.setTextColor(mContext.resources.getColor(R.color.grey))
+        }
+        else if(data.isMyDislike){
+            btnLikeCount.setBackgroundResource(R.drawable.grey_border_box)
+            btnDislikeCount.setBackgroundResource(R.drawable.blue_border_box)
+
+            btnLikeCount.setTextColor(mContext.resources.getColor(R.color.grey))
+            btnDislikeCount.setTextColor(mContext.resources.getColor(R.color.blue))
+        }
+        else{
+            btnLikeCount.setBackgroundResource(R.drawable.grey_border_box)
+            btnDislikeCount.setBackgroundResource(R.drawable.grey_border_box)
+
+            btnLikeCount.setTextColor(mContext.resources.getColor(R.color.grey))
+            btnDislikeCount.setTextColor(mContext.resources.getColor(R.color.grey))
+        }
+
 
         //선택진영 정보
         txtSelectedSide.text = "(${data.selectedSide.title})"
@@ -78,6 +102,10 @@ class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
                      //data변수 내부 값중 좋아요/싫어요 갯수 변경
                      data.likeCount = reply.getInt("like_count")
                      data.dislikeCount = reply.getInt("dislike_count")
+                     
+                     //data변수 내부 값중 나의 좋아요/ 싫어요 변경
+                     data.isMyDislike = reply.getBoolean("my_dislike")
+                     data.isMyLike = reply.getBoolean("my_like")
 
                      //리스트뷰에 뿌려지는 데이터에 내용 변경 =>  odifyDataSetChanged 필요
                      //어댑터변수.notify~ 실행. 그러나 현재 어댑터변수가 없으니 어찌할 것인가
