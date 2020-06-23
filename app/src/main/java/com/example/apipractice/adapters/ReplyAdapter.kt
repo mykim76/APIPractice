@@ -1,6 +1,7 @@
 package com.example.apipractice.adapters
 
 import android.content.Context
+import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,6 @@ import com.example.apipractice.utils.ServerUtil
 import okhttp3.internal.http2.Http2Reader
 import org.json.JSONObject
 import java.text.SimpleDateFormat
-import java.util.logging.Handler
 
 class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
     ArrayAdapter<TopicReply>(context, resId,list)  {
@@ -88,6 +88,9 @@ class ReplyAdapter(context: Context, resId:Int, list: List<TopicReply>):
 //                         notifyDataSetChanged() //어댑터내부에서 직접 새로고침 가능 => runOnUriThread필요
 //                     }
 
+                     Handler(Looper.getMainLooper()).post{
+                         notifyDataSetChanged()
+                     }
 
 
 
