@@ -15,12 +15,14 @@
         android:padding="10dp">
 
         <TextView
+            android:id="@+id/txtWriterNick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:text="작성자닉네임"
             android:textColor="@color/black"/>
         <TextView
+            android:id="@+id/txtSelectedSide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -39,6 +41,7 @@
         android:padding="10dp">
 
         <TextView
+            android:id="@+id/txtContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="의견 전문 나올 자리"
@@ -62,12 +65,14 @@
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/edtContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="의견에 대한 답글 입력"
             android:singleLine="true"/>
         <Button
+            android:id="@+id/btnPostReply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="작성완료"/>
