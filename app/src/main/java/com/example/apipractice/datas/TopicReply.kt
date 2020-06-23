@@ -3,6 +3,7 @@ package com.example.apipractice.datas
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class TopicReply {
 
@@ -23,6 +24,8 @@ class TopicReply {
 
     var isMyLike = false
     var isMyDislike = false
+
+    //val replyList = ArrayList<TopicReply>()
 
     companion object {
         //json 덩어리 input => 내용이 모두 적힌 TopicSide 객체 리턴
@@ -61,6 +64,7 @@ class TopicReply {
 
             tr.isMyLike = json.getBoolean("my_like")
             tr.isMyDislike = json.getBoolean("my_dislike")
+
 
             return tr
         }

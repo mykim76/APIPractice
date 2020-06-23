@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.apipractice.adapters.ReReplyAdapter
+import com.example.apipractice.adapters.ReplyAdapter
 import com.example.apipractice.datas.TopicReply
 import com.example.apipractice.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_view_reply_detail.*
@@ -15,10 +17,14 @@ class ViewReplyDetailActivity : BaseActivity() {
 
     lateinit var mReply: TopicReply
 
-    val mReReplyList = ArrayList<TopicReply>() //서버에서 보내주는 답글 목록을 저장할 배열
+    val mReReplyList = ArrayList<TopicReply>()
+
+    lateinit var mReplyAdapter : ReReplyAdapter
     
     override fun setValues() {
         mReplyId = intent.getIntExtra("replyId",-1)
+        mReplyAdapter = ReReplyAdapter(mContext,R.layout.topic_reply_list_item, mReReplyList)
+        replyListView.adapter = mReplyAdapter
 
     }
 
@@ -33,6 +39,7 @@ class ViewReplyDetailActivity : BaseActivity() {
 
             ServerUtil.postRequestReReply(mContext,mReplyId, inputContent, object :ServerUtil.JsonResponseHandler{
                 override fun onResponse(json: JSONObject) {
+
 
                 }
 
@@ -65,7 +72,19 @@ class ViewReplyDetailActivity : BaseActivity() {
                 val reply = data.getJSONObject("reply")
 
                 mReply = TopicReply.getTopicReplyFromJason(reply)
-                
+                //reply내부의 답글 목록을 JSONArray로 채워넣기
+                val replies = reply.getJSONArray("replies")
+                for(i in 0.. replies.length()-1)
+                {
+//                    val reply = replies.getJSONObject(i)
+//                    val topicReply = TopicReply.getTopicReplyFromJason(reply)
+                    val topicReply = TopicReply.getTopicReplyFromJason(replies.getJSONObject(i))
+                    mReReplyList.add(topicReply)
+                }
+
+
+
+
                 //리스트 채워넣고 => 새로고침 하자
 
                 //==val replies = data.getJSONArray("replies")
@@ -77,9 +96,10 @@ class ViewReplyDetailActivity : BaseActivity() {
 
 
                     //의견목록을 리스트뷰에 뿌려주기
-//                    mReplyAdapter = ReplyAdapter(mContext,R.layout.topic_reply_list_item,mTopic.replyList)
+//                    mReplyAdapter = ReReplyAdapter(mContext,R.layout.topic_reply_list_item,mReReplyList)
 //
 //                    replyListView.adapter = mReplyAdapter
+                    mReplyAdapter.notifyDataSetChanged()
                 }
 
             }
