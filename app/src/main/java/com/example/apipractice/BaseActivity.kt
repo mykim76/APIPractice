@@ -1,5 +1,6 @@
 package com.example.apipractice
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -14,6 +15,7 @@ abstract class BaseActivity : AppCompatActivity() {
     
     lateinit var txtActivityTitle : TextView //제목을 나타내는 텍스트뷰
     lateinit var imgLogo : ImageView // 제목이 없을 때 보여줄 이미지
+    lateinit var imgNotification : ImageView //알림 목록에 들어가는 버튼
     abstract fun setValues()
     abstract fun setupEvents()
 
@@ -52,5 +54,12 @@ abstract class BaseActivity : AppCompatActivity() {
         //XML 에 있는 뷰들을 사용할 수 있도록 연결
         txtActivityTitle = supportActionBar!!.customView.findViewById(R.id.txtActivityTitle)
         imgLogo = supportActionBar!!.customView.findViewById(R.id.imgLogo)
+        imgNotification = supportActionBar!!.customView.findViewById(R.id.imgNotification)
+
+        //알림 버튼을 눌리면 어느 화면에서건 알림 화면으로 이동
+        imgNotification.setOnClickListener {
+            val myIntent = Intent(mContext, NotificationListActivity::class.java)
+            startActivity(myIntent)
+        }
     }
 }
