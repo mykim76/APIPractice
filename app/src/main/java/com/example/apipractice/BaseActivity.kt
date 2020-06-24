@@ -1,6 +1,8 @@
 package com.example.apipractice
 
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,7 @@ abstract class BaseActivity : AppCompatActivity() {
     val mContext = this
     
     lateinit var txtActivityTitle : TextView //제목을 나타내는 텍스트뷰
+    lateinit var imgLogo : ImageView // 제목이 없을 때 보여줄 이미지
     abstract fun setValues()
     abstract fun setupEvents()
 
@@ -26,6 +29,10 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun setTitle(title: CharSequence?) { //각 화면의 setTitle 기본 기능=> 커스텀 액션바에게 반영하도록 오버라이딩
         super.setTitle(title)
         supportActionBar?.let { //액션 바가 있을 때만 실행
+            //로고는 숨기고, 글씨 보이게
+            imgLogo.visibility = View.GONE
+            txtActivityTitle.visibility = View.VISIBLE
+
             txtActivityTitle.text = title
         }
 
@@ -44,5 +51,6 @@ abstract class BaseActivity : AppCompatActivity() {
 
         //XML 에 있는 뷰들을 사용할 수 있도록 연결
         txtActivityTitle = supportActionBar!!.customView.findViewById(R.id.txtActivityTitle)
+        imgLogo = supportActionBar!!.customView.findViewById(R.id.imgLogo)
     }
 }

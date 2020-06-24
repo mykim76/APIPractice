@@ -23,7 +23,7 @@ class MainActivity : BaseActivity() {
     override fun setValues() {
 
         
-        setTitle("토론 목록")
+        //setTitle("토론 목록") //제목 설정 해제 => 기본 그림이 대신 할 것임
         // 진행중인 토론 목록이 어떤게 있는지 무어보자
         ServerUtil.getRequestMainInfo(mContext,object : ServerUtil.JsonResponseHandler{
             override fun onResponse(json: JSONObject) {
