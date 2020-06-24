@@ -22,6 +22,8 @@ class MainActivity : BaseActivity() {
     lateinit var topicAdapter:TopicAdapter //선언만 우선 하고 형은 나중에 알려주겠어
     override fun setValues() {
 
+        
+        setTitle("토론 목록")
         // 진행중인 토론 목록이 어떤게 있는지 무어보자
         ServerUtil.getRequestMainInfo(mContext,object : ServerUtil.JsonResponseHandler{
             override fun onResponse(json: JSONObject) {

@@ -25,6 +25,9 @@ class ViewReplyDetailActivity : BaseActivity() {
     lateinit var mReplyAdapter : ReReplyAdapter
     
     override fun setValues() {
+
+        setTitle("의견 상세 보기")
+        
         mReplyId = intent.getIntExtra("replyId",-1)
         mReplyAdapter = ReReplyAdapter(mContext,R.layout.topic_reply_list_item, mReReplyList)
         replyListView.adapter = mReplyAdapter

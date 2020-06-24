@@ -23,6 +23,8 @@ class ViewTopicDetailActivity : BaseActivity() {
 
     override fun setValues() {
 
+        setTitle("토론 진행 현황")
+        
         mTopicId = intent.getIntExtra("topic_id", -1)
         if(mTopicId==-1){
             Toast.makeText(mContext,"잘못된 접근",Toast.LENGTH_SHORT).show()
