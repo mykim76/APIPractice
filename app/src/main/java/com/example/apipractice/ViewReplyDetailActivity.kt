@@ -1,8 +1,11 @@
 package com.example.apipractice
 
+import android.content.Context
+import android.inputmethodservice.InputMethodService
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.example.apipractice.adapters.ReReplyAdapter
 import com.example.apipractice.adapters.ReplyAdapter
@@ -46,7 +49,12 @@ class ViewReplyDetailActivity : BaseActivity() {
                         getReplyDetailFromServer()
 
                         //리스트뷰의 스크롤을 맨 밑으로 이동
+                        //replyListView.smoothScrollToPosition(mReReplyList.size-1)
                         replyListView.smoothScrollToPosition(mReReplyList.size-1)
+
+                        //키보드 숨기기
+//                        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//                        imm.hideSoftInputFromWindow(Window.ke)
                     }
 
                 }
