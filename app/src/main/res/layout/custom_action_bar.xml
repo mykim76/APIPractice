@@ -4,6 +4,7 @@
     android:layout_height="60dp"
     android:background="@color/black">
 
+
     <ImageView
         android:id="@+id/imgLogo"
         android:layout_width="wrap_content"
@@ -21,12 +22,30 @@
         android:text="액티비티 이름 자리"
         android:textSize="18sp"/>
 
-    <ImageView
-        android:id="@+id/imgNotification"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/notification_icon"
-        android:layout_gravity="right|center_vertical"
-        android:layout_marginRight="5dp"/>
+    <FrameLayout
+        android:id="@+id/notiFrameLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right">
+
+        <ImageView
+            android:id="@+id/imgNotification"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/notification_icon"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="5dp"/>
+
+        <TextView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/red_circle"/>
+
+    </FrameLayout>
+
+
 
 </FrameLayout>

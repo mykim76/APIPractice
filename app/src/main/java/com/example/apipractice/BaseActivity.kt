@@ -3,6 +3,7 @@ package com.example.apipractice
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
@@ -16,6 +17,8 @@ abstract class BaseActivity : AppCompatActivity() {
     lateinit var txtActivityTitle : TextView //제목을 나타내는 텍스트뷰
     lateinit var imgLogo : ImageView // 제목이 없을 때 보여줄 이미지
     lateinit var imgNotification : ImageView //알림 목록에 들어가는 버튼
+
+    lateinit var notiFramlayout : FrameLayout
     abstract fun setValues()
     abstract fun setupEvents()
 
@@ -55,6 +58,8 @@ abstract class BaseActivity : AppCompatActivity() {
         txtActivityTitle = supportActionBar!!.customView.findViewById(R.id.txtActivityTitle)
         imgLogo = supportActionBar!!.customView.findViewById(R.id.imgLogo)
         imgNotification = supportActionBar!!.customView.findViewById(R.id.imgNotification)
+
+        notiFramlayout = supportActionBar!!.customView.findViewById(R.id.notiFrameLayout)
 
         //알림 버튼을 눌리면 어느 화면에서건 알림 화면으로 이동
         imgNotification.setOnClickListener {
