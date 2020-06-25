@@ -53,6 +53,8 @@ abstract class BaseActivity : AppCompatActivity() {
                         }
                         else{
                             //
+                            txtUnreadNotiCount.visibility = View.GONE
+                            txtUnreadNotiCount.text = unreadNotiCount.toString()
 
                         }
                     }

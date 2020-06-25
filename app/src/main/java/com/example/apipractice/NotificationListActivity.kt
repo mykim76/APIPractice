@@ -59,6 +59,10 @@ class NotificationListActivity : BaseActivity() {
 
                 }
 
+                //알림을 받았으면, 받은 최신 알림의 id를 서버로 전파
+                //여기까지 알림을 읽었다고 서버에 알려줌 (unread_noti_count를 0으로 셋팅)
+                ServerUtil.postRequestNotification(mContext, mNotiList[0].id,null) //mNotiList[0].id: 최상위 id=가장마지막 알림.
+
                 runOnUiThread {
                     mNotiAdapter.notifyDataSetChanged()
                 }
