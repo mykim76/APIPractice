@@ -36,13 +36,13 @@ class NotificationAdapter(context: Context, resId:Int, list: List<Notification>)
 
         val txtTitle = row.findViewById<TextView>(R.id.txtTitle)
         val txtMessage = row.findViewById<TextView>(R.id.txtMessage)
-        val txtTimeZone = row.findViewById<TextView>(R.id.txtMessage)
+        //val txtTimeZone = row.findViewById<TextView>(R.id.txtMessage)
         val data = mList[position]
 
 
         txtTitle.text = "${data.title}"
         txtMessage.text = "${data.message}"
-        txtTimeZone.text = TimeUtil.getTimeAgoFromCalendar(data.createdAt)
+        //txtTimeZone.text = TimeUtil.getTimeAgoFromCalendar(data.createdAt)
 
         //txtTimeZone.text = "${data.message}"
 

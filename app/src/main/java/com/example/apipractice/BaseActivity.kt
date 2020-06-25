@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.apipractice.utils.ServerUtil
+import org.json.JSONObject
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -19,6 +21,7 @@ abstract class BaseActivity : AppCompatActivity() {
     lateinit var imgNotification : ImageView //알림 목록에 들어가는 버튼
 
     lateinit var notiFramlayout : FrameLayout
+    lateinit var txtUnreadNotiCount : TextView
     abstract fun setValues()
     abstract fun setupEvents()
 
@@ -31,6 +34,35 @@ abstract class BaseActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {// 모든 화면에서 알림 갯수를 받아와서 표시 // 화면에 돌아올 때마다 실행
+        super.onResume()
+
+        ServerUtil.getRequestNotification(mContext, object : ServerUtil.JsonResponseHandler{
+            override fun onResponse(json: JSONObject) {
+
+                supportActionBar?.let {
+
+                    val data = json.getJSONObject("data")
+                    val unreadNotiCount = data.getInt("unread_noty_count")
+
+                    runOnUiThread{
+                        if(unreadNotiCount>0) {
+                            //빨강 동그라미 표시 + 몇갠지 글자도 표시
+                            txtUnreadNotiCount.visibility = View.VISIBLE
+                            txtUnreadNotiCount.text = unreadNotiCount.toString()
+                        }
+                        else{
+                            //
+
+                        }
+                    }
+                }
+
+            }
+
+        })
+        
+    }
     override fun setTitle(title: CharSequence?) { //각 화면의 setTitle 기본 기능=> 커스텀 액션바에게 반영하도록 오버라이딩
         super.setTitle(title)
         supportActionBar?.let { //액션 바가 있을 때만 실행
@@ -60,6 +92,7 @@ abstract class BaseActivity : AppCompatActivity() {
         imgNotification = supportActionBar!!.customView.findViewById(R.id.imgNotification)
 
         notiFramlayout = supportActionBar!!.customView.findViewById(R.id.notiFrameLayout)
+        txtUnreadNotiCount = supportActionBar!!.customView.findViewById(R.id.txtUnreadNotiCount)
 
         //알림 버튼을 눌리면 어느 화면에서건 알림 화면으로 이동
         imgNotification.setOnClickListener {
