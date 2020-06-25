@@ -3,6 +3,7 @@ package com.example.apipractice
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.apipractice.utils.ContextUtil
 import com.example.apipractice.utils.ServerUtil
@@ -11,6 +12,8 @@ import org.json.JSONObject
 
 class LoginActivity : BaseActivity() {
     override fun setValues() {
+
+        notiFramlayout.visibility = View.GONE
 
 
     }

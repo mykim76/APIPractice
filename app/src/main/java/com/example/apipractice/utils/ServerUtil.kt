@@ -502,7 +502,7 @@ class ServerUtil {
         }
 
         //알림
-        fun getRequestNotification(context: Context,  handler: JsonResponseHandler?){
+        fun getRequestNotification(context: Context,  needAllNotis:Boolean,  handler: JsonResponseHandler?){
             val client = OkHttpClient()
 
             //GET 방식은 주소에 파라미터를 모두 적어줘야 함
@@ -511,6 +511,7 @@ class ServerUtil {
             val urlBuilder = "${BASE_URL}/notification".toHttpUrlOrNull()!!.newBuilder() //가공된 주소를 가지고 파마메타 첨주할 준비
                 //.addEncodedQueryParameter("order_type","NEW")
                 //.addEncodedQueryParameter("value",input)
+                .addEncodedQueryParameter("need_all_notis",needAllNotis.toString() )
                 .build()
 
             val urlString = urlBuilder.toString()
@@ -547,7 +548,7 @@ class ServerUtil {
         }
 
         //알림 어디까지 읽었는지 알려주는 post
-        fun postRequestNotification(context: Context, notiId: Int, handler: JsonResponseHandler?){
+        fun postRequestNotification(context: Context, notiId: Int,handler: JsonResponseHandler?){
 
             val client = OkHttpClient() //서버에 클라이언트로 동작해주는 변수
 
@@ -556,6 +557,7 @@ class ServerUtil {
             //server에 전달할 데이터를 담는 과정(post - 폼데이터)
             val formData = FormBody.Builder()
                 .add("noti_id",notiId.toString())
+                //.add("need_all_notice",needAllNotice.toString())
                 .build()
 
             //서버에 요청할 모든 정보를 담는 request 변수 생성

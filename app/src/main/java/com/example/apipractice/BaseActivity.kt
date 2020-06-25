@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.apipractice.utils.ContextUtil
 import com.example.apipractice.utils.ServerUtil
 import org.json.JSONObject
 
@@ -37,32 +38,37 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onResume() {// 모든 화면에서 알림 갯수를 받아와서 표시 // 화면에 돌아올 때마다 실행
         super.onResume()
 
-        ServerUtil.getRequestNotification(mContext, object : ServerUtil.JsonResponseHandler{
-            override fun onResponse(json: JSONObject) {
+        if(ContextUtil.getUserToken(mContext) != "")
+        {
+            ServerUtil.getRequestNotification(mContext, false, object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
 
-                supportActionBar?.let {
+                    supportActionBar?.let {
 
-                    val data = json.getJSONObject("data")
-                    val unreadNotiCount = data.getInt("unread_noty_count")
+                        val data = json.getJSONObject("data")
+                        val unreadNotiCount = data.getInt("unread_noty_count")
 
-                    runOnUiThread{
-                        if(unreadNotiCount>0) {
-                            //빨강 동그라미 표시 + 몇갠지 글자도 표시
-                            txtUnreadNotiCount.visibility = View.VISIBLE
-                            txtUnreadNotiCount.text = unreadNotiCount.toString()
-                        }
-                        else{
-                            //
-                            txtUnreadNotiCount.visibility = View.GONE
-                            txtUnreadNotiCount.text = unreadNotiCount.toString()
+                        runOnUiThread{
+                            if(unreadNotiCount>0) {
+                                //빨강 동그라미 표시 + 몇갠지 글자도 표시
+                                txtUnreadNotiCount.visibility = View.VISIBLE
+                                txtUnreadNotiCount.text = unreadNotiCount.toString()
+                            }
+                            else{
+                                //
+                                txtUnreadNotiCount.visibility = View.GONE
+                                txtUnreadNotiCount.text = unreadNotiCount.toString()
 
+                            }
                         }
                     }
+
                 }
 
-            }
+            })
+        }
 
-        })
+
         
     }
     override fun setTitle(title: CharSequence?) { //각 화면의 setTitle 기본 기능=> 커스텀 액션바에게 반영하도록 오버라이딩
